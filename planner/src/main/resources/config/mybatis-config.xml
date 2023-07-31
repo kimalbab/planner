@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+<!-- 프로퍼티 파일의 정보를 읽을 수 있도록 설정 -->
+<properties resource="db.properties"/>
+
+
+
+<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
+	<!-- * typeAlias : VO 클래스들의 풀클래스명을 단순한 클래스명으로 사용하기 위해서 별칭을 등록할 수 있는 영역 -->
+	<!-- 유의사항 : 미리 등록 해 두려면 해당 클래스가 실제로 존재하고 있어야 함 -->
+	<typeAliases>
+		<typeAlias type="com.planner.user.model.vo.User" alias="user"/>
+	</typeAliases>
+	
+	
+	<!-- 
+		* environments : mybatis에서 연동할 DB 정보들을 등록하는 영역
+		* environment id 를 구분해서 연결할 DB 여러개 구성 가능
+		* default : 기본적으로 연결할 설정 정보를 설정하는 속성
+	 -->
+	<!-- environment
+		 spring 쓰기 전 : 여기에 environment 태그로 dataSource (연결할 db정보) 등록
+		 spring 사용 후 : root-context.xml 파이에서 dataSource 등록
+		 해당 프로젝트는 spring 을 사용하지 않는 프로젝트로 environment 작성
+	 -->
+	 
+	 <!-- 트랜젝션 관리와 케넥션 풀링을 위한 환경설 -->
+	 <environments default="development">
+	 	<environment id="development">
+	 		<!--
+	 			 * transactionMananger는 JDBC와 MANAGED 중 하나를 선택
+	 			 * JDBC : 트랜젝션을 개발자가 직접 관리 -> 수동 commit
+	 			 * MANAGED : 트랜젝션을 개발자가 관리하지 않음 -> 자동 commit
+	 		 -->
+	 		 <transactionManager type="JDBC"/>
+ 		 	<!-- 
+ 		 	 	* dataSource는 POOLED와 UNPOOLED 중 하나를 사용해 Connection Pool 사용여부 지정
+ 		 	 	>> ConnectionPool : Connection 객체를 담아둘 수 있는 영역으로, 한 번 생성된 Connection 객체를 담아두면 재사용 가능
+ 		 	 	- POOLED : 사용하겠다
+ 		 	 	- UNPOOLED : 사용하지 않겠다.
+ 		 	 -->
+	 		 <dataSource type="POOLED">
+	 		 	<property name="driver" value="${dbDriver}"/>
+	 		 	<property name="url" value="${dbUrl}"/>
+				<property name="username" value="${dbUserName}"/>
+				<property name="password" value="${dbPassword}"/>
+	 		 </dataSource>
+	 	</environment>
+	 </environments>
+
+	 
+	 <!-- * mapper : 실행할 sql문들을 기록 해둔 mapper파일들을 등록하는 영역 -->
+	 <mappers>
+	 	<mapper resource="/mappers/user-mapper.xml"/>
+ 	</mappers>
+ 
+ </configuration>

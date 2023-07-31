@@ -14,8 +14,25 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.4.1</version>
+	</dependency>
+    
   </dependencies>
+  
+  
   <build>
     <finalName>planner</finalName>
+    <resources>
+    	<resource>
+            <directory>src/main/resources</directory>
+        </resource>
+    </resources>
   </build>
+  
+
 </project>

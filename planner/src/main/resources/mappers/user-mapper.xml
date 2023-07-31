@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userMapper">
+<!-- namespace : 해당 mapper 파일만의 고유한 별칭 -->
+<!-- 
+	* resultMap : 마이바티스의 핵심 기능 중 하나
+				  ResultSet으로부터 조회된 컬럼값 하나씩 뽑아서 지정한 VO 객체 각 필드에 매핑해 JDBC 단순화
+				 
+				 <resultMap id="식별자" type="조회결과 담아 반환하고자 하는 VO 객체 타입">
+				 	<result column="조회결과를 뽑고자 하는 DB 컬럼명" property="해당결과를 담고자 하는 필드명"/>
+				 </resultMap>
+-->
+
+<resultMap type="User" id="userResult">
+		<result column="USERNO" property="userNo" />
+		<result column="ID" property="id" />
+		<result column="USERKEY" property="userKey" />
+		<result column="NAME" property="name" />
+		<result column="NICKNAME" property="nickname" />
+		<result column="GENDER" property="gender" />
+		<result column="BIRTH" property="birth" />
+		<result column="GRADE" property="grade" />
+		<result column="STATUS" property="status" />
+		<result column="ENTERDATE" property="enterDate" />
+		<result column="MODIFYDATE" property="modifyDate" />
+</resultMap>
+
+<!-- 1. 회원등록 -->
+	<insert id="insertUser">
+		INSERT 
+		INTO USER (
+					ID
+				  , USERKEY
+				  , NAME
+				  , NICKNAME
+				  , GENDER
+				  , BIRTH
+				  , GRADE
+				  , STATUS
+				  , ENTERDATE
+				  , MODIFYDATE
+				  )
+		   VALUES (
+		   			#{id}
+		   		  , #{userKey}
+		   		  , #{name}
+		   		  , #{nickname}
+		   		  , #{gender}
+		   		  , #{birth}
+		   		  , #{grade}
+		   		  , #{status}
+		   		  , #{enterDate}
+		   		  , #{modifyDate}
+		   		  )
+	</insert>
+	
+	<!-- 2. 회원조회 -->
+	<select id="selectUser" resultMap="userResult">
+	    SELECT
+	    		  USERNO
+	    		, ID
+				, USERKEY
+				, NAME
+				, NICKNAME
+				, GENDER
+				, BIRTH
+				, GRADE
+				, STATUS
+				, ENTERDATE
+				, MODIFYDATE
+		   FROM   USER
+		  WHERE   STATUS = 'Y'
+		    AND   USERNO = #{userNo}
+	</select>
+
+
+</mapper>

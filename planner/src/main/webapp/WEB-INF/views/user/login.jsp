@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Planner</title>
+<style>
+	#loginBtn { margin-top : 10px;}
+	
+	#joinLink { text-decoration : none; }
+</style>
 </head>
 <jsp:include page="../common/default.jsp"/>
 <body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
@@ -23,10 +28,10 @@
             <label for="inputPassword">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">로그인</button>
+          <button type="submit" class="btn btn-primary btn-block col-md-12" id="loginBtn">로그인</button>
         </form>
         <div class="text-center mt-3">
-          <a href="#" class="btn btn-link">회원가입</a>
+          <a href="#" class="btn btn-link" id="joinLink">회원가입</a>
         </div>
       </div>
     </div>

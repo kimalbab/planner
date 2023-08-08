@@ -36,11 +36,13 @@ public class UserLoginController extends HttpServlet {
 		User loginUser = new UserServiceImpl().loginUser(u);
 		
 		if(loginUser == null) {
+			System.out.println("로그인실패");
 			request.setAttribute("errorMsg", "로그인 실패");
-			request.getRequestDispatcher("WEB-INF/views/common/main.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 		} else {
+			System.out.println("로그인성공");
 			request.getSession().setAttribute("loginUser", loginUser);
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()); // planner
 		}
 	}
 

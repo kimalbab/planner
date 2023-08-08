@@ -36,6 +36,7 @@ public class Template {
 		
 		try {
 			// /config/mybatis-config.xml 파일을 읽어들이기 위한 입력용스트림
+			// 만약 여기서 classNotFoundException 이 뜬다면 propertyes > Depolyment Assembly > Java Build Path Entries > maven 통채로 추가
 			InputStream stream = Resources.getResourceAsStream("/config/mybatis-config.xml");
 			sqlSession = new SqlSessionFactoryBuilder().build(stream).openSession(false);
 			System.out.println("connected");

@@ -61,7 +61,7 @@ public class UserDao {
 		 * 
 		 */
 		// selectOne 메소드 : 조회결과가 없다면 null반환
-		User loginUser = sqlSession.selectOne("UserMapper.loginUser", u);
+		User loginUser = sqlSession.selectOne("userMapper.loginUser", u);
 		return loginUser;
 	}
 }

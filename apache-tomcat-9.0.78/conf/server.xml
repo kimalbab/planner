@@ -66,7 +66,14 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
+	<!--
     <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443"
+               maxParameterCount="1000"
+               /> -->
+
+	<Connector port="8777" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443"
                maxParameterCount="1000"
@@ -158,22 +165,19 @@
                resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="webapps"
-            unpackWARs="true" autoDeploy="true">
-
-        <!-- SingleSignOn valve, share authentication between web applications
-             Documentation at: /docs/config/valve.html -->
-        <!--
-        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-        -->
-
-        <!-- Access log processes all example.
-             Documentation at: /docs/config/valve.html
-             Note: The pattern used is equivalent to using pattern="common" -->
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log" suffix=".txt"
-               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-
+	<!--
+      <Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true">
+			    <Context docBase="..\..\planner\src\main\webapp" path="/planner" reloadable="true" />
+      </Host>
+	  
+	  <Host name="localhost"  appBase="D:\5_Etc\01_Lesson\01_Planner" unpackWARs="true" autoDeploy="true">
+			    <Context docBase="\planner\src\main\webapp" path="/planner" reloadable="true" />
+      </Host>
+	  위 방법들로도 가능하나 그래도 가장 상식적으로 보이는 방법 채택
+	  docbase에서 절대경로를 지정할 경우 appBase 설정은 무시됨
+ -->
+	<Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true">
+			    <Context docBase="D:\5_Etc\01_Lesson\01_Planner\planner\src\main\webapp" path="/planner" reloadable="true" />
       </Host>
     </Engine>
   </Service>

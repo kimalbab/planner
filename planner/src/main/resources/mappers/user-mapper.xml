@@ -54,8 +54,8 @@
 		   		  )
 	</insert>
 	
-	<!-- 2. 회원조회 -->
-	<select id="selectUser" resultMap="userResult">
+	<!-- 2. 로그인 회원조회 -->
+	<select id="loginUser" resultMap="userResult">
 	    SELECT
 	    		  USERNO
 	    		, ID
@@ -70,7 +70,8 @@
 				, MODIFYDATE
 		   FROM   USER
 		  WHERE   STATUS = 'Y'
-		    AND   USERNO = #{userNo}
+		    AND   ID = #{id}
+		    AND   USERKEY = #{userKey}
 	</select>
 
 

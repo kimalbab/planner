@@ -8,8 +8,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.planner.common.logs.BasicLogger;
+
 public class Template {
-	
+	private static BasicLogger basicLogger = new BasicLogger();
 	/*
 	 * 기존 JDBC
 	 * public static Connection getConnection(){
@@ -42,7 +44,7 @@ public class Template {
 			System.out.println("connected");
 		
 		} catch (Exception e) {
-			e.printStackTrace();
+			basicLogger.exception("exception msg", e);
 		}
 		
 		return sqlSession;

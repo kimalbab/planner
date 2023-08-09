@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <!-- log 파일을 저장하는 위치와 정책 -->
+		<RollingFile name="SaveFile">
+		  <FileName>D:/5_Etc/01_Lesson/01_Planner/planner/logs/Log.log</FileName>
+		  <FilePattern>D:/5_Etc/01_Lesson/01_Planner/planner/logs/%d{yyyy-MM-dd-HH}.log</FilePattern>
+		  <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>	
+		  <Policies>
+		    <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+		  </Policies>
+		  <DefaultRolloverStrategy max="7" fileIndex="max" >
+		  	<Delete basePath = "D:/5_Etc/01_Lesson/01_Planner/planner/logs/" maxDepth = "1">
+		  		<!-- 30일이 경과한 로그파일은 자동 삭제 -->
+		  		<IfLastModified age = "30d"/>
+		  	</Delete>
+		  </DefaultRolloverStrategy>
+		</RollingFile>
+    </Appenders>
+    <Loggers>
+         <!-- 기본(디폴트) loger 설정-->
+        <Root level="INFO">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="SaveFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
